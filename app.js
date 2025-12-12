@@ -17,7 +17,7 @@ document.getElementById("checkBtn").onclick = async () => {
 
 
     try {
-        const res = await fetch("https://fsociety-backend.onrender.com/check", {
+        const res = await fetch("https://fs-backend-k7vk.onrender.com/check", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ url })
