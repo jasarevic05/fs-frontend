@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <title>Fsociety</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+
+<div id="loading-screen">
+    <div class="loader-text">Initializing Fsociety...</div>
+</div>
+
+<header class="header">
+    <div class="logo">Fsociety - Link Security Checker</div>
+</header>
+
+<div class="search-wrapper">
+
+    <!-- SEARCH (UVIJEK GORE, ODVOJENO) -->
+    <div class="search-container">
+        <input id="urlInput" type="text" placeholder="Unesite link za provjeru...">
+        <button id="checkBtn" class="btn">Provjeri link</button>
+    </div>
+
+    <!-- RESULT (ISPOD, SAKRIVEN DOK SE NE KORISTI) -->
+    <div id="result" class="result-box"></div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

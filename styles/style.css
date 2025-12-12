@@ -1,0 +1,298 @@
+/* === postojeći CSS ostaje === */
+
+.status-safe { color: #00ff00; }
+.status-warning { color: #ffcc00; }
+.status-danger { color: #ff3333; }
+
+details {
+    margin-top: 10px;
+    border-top: 1px solid #0f0;
+    padding-top: 8px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #0f0;
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.flag {
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.section {
+    margin-top: 8px;
+    padding-left: 10px;
+    font-size: 0.95rem;
+}
+body {
+    margin: 0;
+    background: black;
+    color: #0f0;
+    font-family: monospace;
+    text-align: center;
+}
+
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-text {
+    font-size: 24px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.header {
+    padding: 20px;
+    font-size: 32px;
+}
+
+.search-container {
+    margin-top: 50px;
+}
+
+.search-container input {
+    width: 500px;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+}
+
+.btn {
+    width: 110px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid rgba(0, 255, 0, 0.6);
+    background: linear-gradient(135deg, #0f0 0%, #0a0 100%);
+    color: #000;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 0 10px rgba(0,255,0,0.4),
+        inset 0 0 10px rgba(0,0,0,0.6);
+}
+
+/* neon glow */
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: 50px;
+    background: linear-gradient(
+        90deg,
+        #00ff00,
+        #00ffaa,
+        #00ff00
+    );
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 0.3s;
+}
+
+/* hover efekat */
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 0 20px rgba(0,255,0,0.8),
+        0 0 40px rgba(0,255,0,0.4);
+}
+
+/* klik */
+.btn:active {
+    transform: scale(0.97);
+}
+
+
+.result-box {
+    display: none;              /* ⬅️ KLJUČNO */
+    margin-top: 30px;
+    width: 520px;
+    max-height: 60vh;
+    overflow-y: auto;
+    border: 1px solid #0f0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+
+/* confidence bar */
+.progress {
+    height: 20px;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+
+.safe { background: #00ff00; }
+.warning { background: #ffcc00; }
+.danger { background: #ff3333; }
+
+/* risk label */
+.risk-low { color: #00ff00; }
+.risk-medium { color: #ffcc00; }
+.risk-high { color: #ff3333; }
+
+hr {
+    border: 0;
+    border-top: 1px solid #0f0;
+    margin: 10px 0;
+}
+
+
+.status-safe { color: #00ff00; }
+.status-warning { color: #ffcc00; }
+.status-danger { color: #ff3333; }
+
+details {
+    margin-top: 10px;
+    border-top: 1px solid #0f0;
+    padding-top: 8px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #0f0;
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.flag {
+    width: 24px;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+.section {
+    margin-top: 8px;
+    padding-left: 10px;
+    font-size: 0.95rem;
+}
+
+/* ============================= */
+/* STATUS ANIMACIJE             */
+/* ============================= */
+
+/* SAFE – lagani zeleni glow */
+.status-safe {
+    animation: safePulse 2.5s infinite;
+}
+
+@keyframes safePulse {
+    0% {
+        text-shadow: 0 0 5px #00ff00;
+    }
+    50% {
+        text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+    }
+    100% {
+        text-shadow: 0 0 5px #00ff00;
+    }
+}
+
+/* WARNING – žuti blink */
+.status-warning {
+    animation: warningBlink 1.5s infinite;
+}
+
+@keyframes warningBlink {
+    0%, 100% {
+        text-shadow: 0 0 5px #ffcc00;
+        opacity: 1;
+    }
+    50% {
+        text-shadow: 0 0 20px #ffcc00;
+        opacity: 0.6;
+    }
+}
+
+/* DANGEROUS – agresivni crveni pulse */
+.status-danger {
+    animation: dangerPulse 1s infinite;
+}
+
+@keyframes dangerPulse {
+    0% {
+        text-shadow: 0 0 5px #ff3333;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 25px #ff3333, 0 0 40px #ff0000;
+        transform: scale(1.05);
+    }
+    100% {
+        text-shadow: 0 0 5px #ff3333;
+        transform: scale(1);
+    }
+}
+
+/* ============================= */
+/* CENTER SEARCH + RESULTS BELOW */
+/* ============================= */
+
+.search-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    z-index: 2;
+}
+
+/* result je ispod */
+.result-box {
+    display: none;
+    margin-top: 30px;
+    width: 520px;
+    border: 1px solid #00ff00;
+    padding: 15px;
+    border-radius: 12px;
+    z-index: 1;
+}
+
