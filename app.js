@@ -12,9 +12,8 @@ document.getElementById("checkBtn").onclick = async () => {
         return;
     }
 
-    result.style.display = "block";   // ⬅️ sad se pojavljuje
+    result.style.display = "block";
     result.innerHTML = "Provjeravam...";
-
 
     try {
         const res = await fetch("https://fs-backend-k7vk.onrender.com/check", {
@@ -25,12 +24,6 @@ document.getElementById("checkBtn").onclick = async () => {
 
         const d = await res.json();
         const c = d.ai_confidence;
-
-        if (!url) {
-            result.style.display = "none";
-            alert("Unesite link za provjeru");
-        return;
-}
 
         /* STATUS IKONICE */
         let icon = "❌";
@@ -57,6 +50,9 @@ document.getElementById("checkBtn").onclick = async () => {
                 ? "Nepoznato"
                 : d.virustotal.safe ? "Da" : "Ne";
 
+        /* WHOIS helper */
+        const w = d.whois_extended || {};
+
         result.innerHTML = `
             <h3 class="${statusClass}">
                 ${icon} ${c.label} – ${c.risk}
@@ -82,8 +78,8 @@ document.getElementById("checkBtn").onclick = async () => {
                 <p><b>Grad:</b> ${d.geoip.city}</p>
                 <p><b>ISP:</b> ${d.geoip.isp}</p>
                 <p><b>ASN:</b> ${d.geoip.asn}</p>
-                <p><b>VPN / Proxy:</b> ${d.geoip.proxy ? "DA" : "NE"}</p>
-                <p><b>Hosting:</b> ${d.geoip.hosting ? "DA" : "NE"}</p>
+                <p><b>VPN / Proxy:</b> ${d.geoip.proxy ? "DA ⚠" : "NE ✔"}</p>
+                <p><b>Hosting:</b> ${d.geoip.hosting ? "DA ⚠" : "NE ✔"}</p>
                 <p><b>TOR Exit Node:</b> ${d.tor_exit_node ? "DA ❌" : "NE ✔"}</p>
             </details>
 
@@ -98,6 +94,21 @@ document.getElementById("checkBtn").onclick = async () => {
                 </p>
             </details>
 
+            <!-- ✅ DODANO: WHOIS -->
+            <details>
+                <summary>📄 WHOIS informacije</summary>
+                <p><b>Registrar:</b> ${w.registrar || "Nepoznato"}</p>
+                <p><b>Starost domene:</b>
+                    ${w.age_days !== -1 ? w.age_days + " dana" : "Nepoznato"}
+                </p>
+                <p><b>Privacy protection:</b>
+                    ${w.privacy ? "DA ⚠" : "NE ✔"}
+                </p>
+                <p><b>Kreirana:</b> ${w.creation_date || "Nepoznato"}</p>
+                <p><b>Zadnja izmjena:</b> ${w.updated_date || "Nepoznato"}</p>
+                <p><b>Ističe:</b> ${w.expiration_date || "Nepoznato"}</p>
+            </details>
+
             <details>
                 <summary>🔗 Tehnički detalji</summary>
                 <p><b>Originalni URL:</b><br>${d.original_url}</p>
@@ -107,6 +118,7 @@ document.getElementById("checkBtn").onclick = async () => {
                 <p><b>IP adresa:</b> ${d.ip_address}</p>
             </details>
         `;
+
     } catch (err) {
         result.innerHTML = `<span style="color:red">Greška: ${err.message}</span>`;
     }
